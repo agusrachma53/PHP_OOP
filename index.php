@@ -12,10 +12,19 @@ ob_end_clean();
 
  ?>
 
+ <script type="text/javascript">
+   $(document).ready(function(){
+     alert("ok");
+
+  });
+ </script>
+
 <?php include "config/config.php"; ?>
 <?php include "classes/database.php"; ?>
 <?php include "classes/shoes.php"; ?>
+<?php include "classes/customer.php"; ?>
 <?php include "classes/utility.php"; ?>
+<?php include "classes/shoppingcart.php"; ?>
 
 
  <?php //include "asset/crypt/cryptographp.fct.php"; ?>
@@ -326,6 +335,58 @@ ob_end_clean();
    //
    //
 	// 		})
+
+  $(document).ready(function(){
+      $("#login_submit").click(function(){
+        if(loginformvalidation()==true){
+          $.ajax({
+            type:"POST",
+            url:"<?php echo $base_url; ?>serviceforajax/checklogin.php",
+            data:"username=" + $("#username").val() + "&password=" + $("#password").val(),
+            beforeSend: function() {
+              $("#preloader").fadeIn(1500);
+            },
+            success: function(resdata){
+              $("#preloader").fadeOut(1500);
+              if(resdata != "failed"){
+                $("#login_box").hide();
+                $("#login_info").show();
+                $("#costumer_name_active").html(resdata);
+              }else{
+                $("#login_error").show();
+              }
+            }
+          });
+        }
+      });
+
+  });
+
+
+// +++++++++++++++++++++++++++++++++++++ addchart +++++++++++++++++++++++++++++++++++++++++++++++
+
+  $(".addtocart").click(function(){
+    //alert($(this).attr("shoes-id"));
+    var qty = 1;
+    if ($("#qty").val() != "" && $("#qty").val() != null && $("#qty").empty()){
+      qty = $("#qty").val();
+    }
+
+    $.ajax({
+      type:"POST",
+      url:"<?php echo $base_url ?>serviceforajax/addtocart.php",
+      data:"shoes_id=" + $(this).attr("shoes-id") + "&qty=" + qty,
+      beforeSend: function(){
+        $("#preloader").fadeIn(1500);
+      },
+      success: function(resdata){
+        $("#preloader").fadeOut(1500);
+        $("#totalqty").html("<strong>" + resdata + " items</strong>");
+      }
+    });
+
+  });
+
 
   });
 

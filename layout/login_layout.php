@@ -1,10 +1,14 @@
 <div id="login_info" class="sidebar_box">
    <div style="padding:8px;">
      <div>Halo selamat Datang , </div>
-     <div><span id="customer_name_active"><?php echo $_SESSION["customer_name"]; ?></span></div>
+     <div><span id="customer_name_active">
+       <?php if(isset($_SESSION["customer_name"])){ ?>
+       <?php echo $_SESSION["customer_name"]; ?>
+       <?php }else{} ?>
+     </span></div>
      <div>
        <a href="process/logout.php" style="margin-right:10px;">Log Out</a>
-       <a href="index.php?customer_detail"> Profile User </a>
+       <a href="index.php?customer_detail&customer_id=<?php echo $_SESSION["customer_id"] ?>"> Profile User </a>
      </div>
    </div>
 </div>
@@ -24,7 +28,7 @@
 
                   <label> Username : </label>
 
-                  <input type="text" name="username" id="username_id" value="" required class="required input_field" />
+                  <input type="text" name="username" id="username" value="" required class="required input_field" />
 
                   <div class="cleaner h10"></div>
 
@@ -59,29 +63,5 @@
 
 </div>
 <script type="text/javascript">
-  $(document).ready(function(){
-      $("#login_submit").click(function(){
-        if(loginformvalidation()==true){
-          $.ajax({
-            type:"POST",
-            url:"<?php echo $base_url; ?>serviceforajax/checklogin.php",
-            data:"username" + $("#username").val() + "&password=" + $("#password").val(),
-            beforeSend: function() {
-              $("#preloader").fadeIn(1500);
-            },
-            success: function(resdata){
-              $("#preloader").fadeOut(1500);
-              if(resdata!="failed"){
-                $("#login_box").hide();
-                $("#login_info").show();
-                $("#costumer_name_active").html(resdata);
-              }else{
-                $("#login_error").show();
-              }
-            }
-          });
-        }
-      });
 
-  });
 </script>

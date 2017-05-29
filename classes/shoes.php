@@ -12,7 +12,7 @@ class shoes extends database
   private $_best_seller_flag= 0;
   private $_publish = 0;
   private $_create_date = "";
-  private $sql = "SELECT ms_shoes.*,ms_brand.brand_name FROM ms_shoes INNER JOIN ms_brand ON ms_shoes.brand_id = ms_brand.brand_id ";
+  private $sql = "SELECT * FROM ms_shoes INNER JOIN ms_brand ON ms_shoes.brand_id = ms_brand.brand_id ";
 
 
 function __construct($shoes_id="",$root=false)
@@ -142,17 +142,19 @@ function get_all($brand_id=0, $exshoes_id=0){
   $result = NULL;
   $sql = $this->sql;
   if($brand_id>0){
-    $sql=$sql . "WHERE ms_shoes.brand_id=" . $brand_id . " ";
+    $sql = $sql . "WHERE ms_shoes.brand_id=" . $brand_id . " ";
   }
 
   if($exshoes_id>0){
     if(strpos($sql, "WHERE")>-1){
-      $sql = $sql . "AND ms_shoes.shoes_id<>" . $exshoes_id;
+      $sql = $sql . "AND ms_shoes.shoes_id<>" . $exshoes_id . " LIMIT 3";
     }else{
-      $sql = $sql . "WHERE ms_shoes.shoes_id<>" . $exshoes_id;
+      $sql = $sql . "WHERE ms_shoes.shoes_id<>" . $exshoes_id . " LIMIT 3";
     }
   }
+
   $query = parent::db_queryresult($sql);
+
   $utility_obj = new utility();
   if(!$utility_obj->isarrayempty($query)){
     $result=$query;

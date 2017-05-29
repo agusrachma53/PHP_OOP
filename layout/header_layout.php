@@ -1,4 +1,4 @@
-	
+
 
 	<div id="site_title"><h1><a href="#">Online Shoes Store</a></h1></div>
 
@@ -10,12 +10,18 @@
 
             <p>
 
-            	Shopping Cart: <span id="totalqty"><strong>0 items</strong></span> ( <a href="<?php echo $base_url; ?>index.php?shoppingcart">Show Cart</a> )
+            	Shopping Cart: <span id="totalqty"><strong>
+							<?php
+
+								if(isset($_SESSION["cart"])){
+									$cart = new shoppingcart();
+									echo $cart->gettotalqty();
+								}
+							?>
+							 items</strong></span> ( <a href="<?php echo $base_url; ?>index.php?shoppingcart">Show Cart</a> )
 
 			</p>
 
 		</div>
 
         <div class="cleaner"><div id="lala"></div></div>
-
-        

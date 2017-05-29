@@ -37,7 +37,7 @@
                    <p class="product_price">Rp. <?php echo number_format($rows['price'],2,",",".") ?> </p>
                     <p><?php echo substr($rows['description'],0,100) ?></p>
 
-                    <a href="javascript:" shoes-id="" class="addtocart"></a>
+                    <a href="javascript:" shoes-id="<?php echo $rows['shoes_id']  ?>" class="addtocart"></a>
 
                     <a href="index.php?detail&shoes_id=<?php echo $rows['shoes_id'] ?>" class="detail"></a>
 

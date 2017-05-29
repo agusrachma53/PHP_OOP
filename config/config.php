@@ -1,7 +1,7 @@
 <?php
 
    //$base_url="http://babastudio.org/php3/";
-   $base_url="http://localhost/php_advance/"; 
+   $base_url="http://localhost/php_oop/"; 
 
    $adminlayoutmodule_url="modules/";
 

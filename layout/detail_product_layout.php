@@ -29,7 +29,7 @@ if(isset($_GET['shoes_id'])) {
                       $filetb = $filename . "_small" . $fileext;
                   ?>
                   <a title="Product Name"  rel='lightbox[roadtrip]' href='<?php echo $display_image_url . $rowimg["image_name"];  ?>' >
-                     <img  rel="lightbox[roadtrip]" class="detail_img" src="<?php echo $display_image_url . $filetb;  ?>" alt="image" />
+                     <img  rel="lightbox[roadtrip]" class="detail_img" src="<?php echo $display_image_url . $rowimg["image_name"];  ?>" alt="image" />
                    </a>
 
                    <?php }} ?>
@@ -104,7 +104,7 @@ if(isset($_GET['shoes_id'])) {
 
 
 
-                <a style="float:right; margin-right:90px;" href="javascript:" class="addtocart" id="aaxx" shoes-id=""></a>
+                <a style="float:right; margin-right:90px;" href="javascript:" class="addtocart" id="aaxx" shoes-id="<?php echo $shoes_obj->shoes_id(); ?>"></a>
 
 
 
@@ -138,7 +138,7 @@ if(isset($_GET['shoes_id'])) {
 
                 <p class="product_price"><?php echo number_format($rowsame["price"],2,",","."); ?></p>
 
-                <a href="shoppingcart.php?id=<?php echo $rowsame["shoes_id"] ?>&command=add" class="addtocart"></a>
+                <a href="javascript:" class="addtocart" shoes-id="<?php echo $rowsame["shoes_id"] ?>"></a>
 
                 <a href="index.php?detail&shoes_id=<?php echo $rowsame["shoes_id"] ?>" class="detail"></a>
 

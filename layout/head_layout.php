@@ -57,6 +57,8 @@
 			return true;
 		}
 
+
+
 		$(document).ready(function() {
 
 
@@ -78,7 +80,13 @@
 			})
 
 
-		
+			<?php if(isset($_SESSION["customer_name"])){ ?>
+ 	      $("#login_info").show();
+ 	      $("#login_box").hide();
+ 	   <?php }else{ ?>
+ 	      $("#login_info").hide();
+ 	      $("#login_box").show();
+ 	   <?php } ?>
 
 
 
