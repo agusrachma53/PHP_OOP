@@ -14,6 +14,17 @@ class shoppingcart {
     }
   }
 
+  function removecart($shoes_id = 0){
+    if($shoes_id>0){
+      for($i=0;$i<=count($_SESSION["cart"])-1;$i++){
+        if($_SESSION["cart"][$i]["shoes_id"]==$shoes_id){
+          array_splice($_SESSION["cart"],$i,1);
+          break;
+        }
+      }
+    }
+  }
+
   function gettotalqty(){
     $total = 0;
     for($i=0;$i<=count($_SESSION["cart"])-1;$i++){

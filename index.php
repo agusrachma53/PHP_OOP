@@ -387,8 +387,33 @@ ob_end_clean();
 
   });
 
+  // +++++++++++++++++++++++++++++++++++++ End addchart +++++++++++++++++++++++++++++++++++++++++++++++
 
+  // +++++++++++++++++++++++++++++++++++++ Remove addchart ++++++++++++++++++++++++++++++++++++++++++++
+
+  $(".removecart").click(function(){
+      //alert($(this).attr("shoes-id"));
+      removecart($(this).attr("shoes-id"));
   });
+
+  // +++++++++++++++++++++++++++++++++++++ End Remove addchart ++++++++++++++++++++++++++++++++++++++++
+  });
+
+  function removecart(shoes_id){
+    $.ajax({
+      type:"POST",
+      url:"<?php echo $base_url ?>serviceforajax/removecart.php",
+      data:"shoes_id=" + shoes_id,
+      beforeSend: function(){
+        $("#preloader").fadeIn(1000);
+      },
+      success: function(datares){
+        $("#preloader").fadeOut(1000);
+        $("#totalqty").html("<strong>" + datares + " items</strong>");
+        
+      }
+    });
+  }
 
 
 </script>
